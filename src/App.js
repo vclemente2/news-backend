@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { Routes } = require("./routes/Routes");
 
 class App {
   #app;
@@ -7,13 +8,7 @@ class App {
     this.#app = express();
     this.#app.use(cors());
     this.#app.use(express.json());
-    this.#app.get("/", (_, res) =>
-      res.json({
-        version: "1.0.0",
-        description: "News API",
-        author: "Vinicius Bastos Clemente"
-      })
-    );
+    this.#app.use(new Routes().getRoute());
   }
 
   getApp() {
