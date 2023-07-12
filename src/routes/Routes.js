@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { CategoryController } = require("../Controllers/CategoryController");
 const { BodyValidation } = require("../middlewares/bodyValidationMiddleware");
+const { NewsController } = require("../Controllers/NewsController");
 const { categorySchema } = require("../schemas/categorySchema");
 
 class Routes {
@@ -22,8 +23,8 @@ class Routes {
         BodyValidation.validate(categorySchema),
         CategoryController.create
       )
-      .get("/news", () => {})
-      .post("/news", () => {});
+      .get("/news", NewsController.findAll)
+      .post("/news", NewsController.create);
   }
 
   getRoute() {
