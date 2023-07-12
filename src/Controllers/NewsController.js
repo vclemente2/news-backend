@@ -17,7 +17,15 @@ class NewsController {
     }
   }
 
-  static async findAll(req, res) {}
+  static async findAll(_, res) {
+    try {
+      const news = await db.News.findAll({ include: "category" });
+      return res.json(news);
+    } catch (error) {
+      const message = error.statusCode ? error.message : "Internal error.";
+      return res.status(error.statusCode || 500).json({ message });
+    }
+  }
 }
 
 module.exports = { NewsController };
