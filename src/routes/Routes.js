@@ -3,6 +3,7 @@ const { CategoryController } = require("../Controllers/CategoryController");
 const { BodyValidation } = require("../middlewares/bodyValidationMiddleware");
 const { NewsController } = require("../Controllers/NewsController");
 const { categorySchema } = require("../schemas/categorySchema");
+const { newsSchema } = require("../schemas/newsSchema");
 
 class Routes {
   #route;
@@ -24,7 +25,11 @@ class Routes {
         CategoryController.create
       )
       .get("/news", NewsController.findAll)
-      .post("/news", NewsController.create);
+      .post(
+        "/news",
+        BodyValidation.validate(newsSchema),
+        NewsController.create
+      );
   }
 
   getRoute() {
