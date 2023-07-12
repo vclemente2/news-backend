@@ -9,3 +9,5 @@ class ApiError extends Error {
     return this.#statusCode;
   }
 }
+
+module.exports = { ApiError };
