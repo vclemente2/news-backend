@@ -17,10 +17,16 @@ class NewsController {
     }
   }
 
-  static async findAll(_, res) {
+  static async findAll(req, res) {
     try {
-      const news = await db.News.findAll({ include: "category" });
-      return res.json(news);
+      const { page } = req.query;
+
+      const news = await db.News.findAll({
+        include: "category",
+        limit: 6,
+        offset: (page * 3 - 3) | 0
+      });
+      return res.json({ news, page });
     } catch (error) {
       const message = error.statusCode ? error.message : "Internal error.";
       return res.status(error.statusCode || 500).json({ message });
