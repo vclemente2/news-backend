@@ -19,14 +19,22 @@ class NewsController {
 
   static async findAll(req, res) {
     try {
-      const { page } = req.query;
+      const { page = 1 } = req.query;
+      const limit = 6;
+      const offset = (Number(page) - 1) * limit;
 
       const news = await db.News.findAll({
-        include: "category",
-        limit: 6,
-        offset: (page * 3 - 3) | 0
+        include: "category"
       });
-      return res.json({ news, page });
+
+      const lastPage = Math.ceil(news.length / limit);
+
+      const paginate =
+        Number(page) === lastPage
+          ? news.slice(offset)
+          : news.slice(offset, limit);
+
+      return res.json({ news: paginate, page: Number(page), lastPage });
     } catch (error) {
       const message = error.statusCode ? error.message : "Internal error.";
       return res.status(error.statusCode || 500).json({ message });
