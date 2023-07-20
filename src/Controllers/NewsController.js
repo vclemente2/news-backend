@@ -24,7 +24,8 @@ class NewsController {
       const offset = (Number(page) - 1) * limit;
 
       const news = await db.News.findAll({
-        include: "category"
+        include: "category",
+        order: [["updatedAt", "DESC"]]
       });
 
       const lastPage = Math.ceil(news.length / limit);
@@ -44,11 +45,13 @@ class NewsController {
   static async findAll(req, res) {
     try {
       const news = await db.News.findAll({
+        order: [["updatedAt", "DESC"]],
         include: "category"
       });
 
       return res.json(news);
     } catch (error) {
+      console.log(error);
       const message = error.statusCode ? error.message : "Internal error.";
       return res.status(error.statusCode || 500).json({ message });
     }
