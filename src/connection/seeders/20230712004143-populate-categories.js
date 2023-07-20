@@ -8,16 +8,19 @@ module.exports = {
       [
         {
           name: "Jornalismo",
+          color: "blue",
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: "Esporte",
+          color: "green",
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
           name: "Entreterimento",
+          color: "yellow",
           createdAt: new Date(),
           updatedAt: new Date()
         }
