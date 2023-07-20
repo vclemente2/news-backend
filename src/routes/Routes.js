@@ -24,7 +24,8 @@ class Routes {
         BodyValidation.validate(categorySchema),
         CategoryController.create
       )
-      .get("/news", NewsController.findAll)
+      .get("/news/all", NewsController.findAll)
+      .get("/news", NewsController.paginate)
       .post(
         "/news",
         BodyValidation.validate(newsSchema),
