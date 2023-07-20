@@ -6,7 +6,9 @@ class App {
   #app;
   constructor() {
     this.#app = express();
-    this.#app.use(cors());
+    this.#app.use(
+      cors({ origin: "https://cute-tan-buffalo-cuff.cyclic.app/" })
+    );
     this.#app.use(express.json());
     this.#app.use(new Routes().getRoute());
   }
