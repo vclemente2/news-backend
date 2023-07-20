@@ -5,7 +5,7 @@ const categorySchema = Joi.object({
     .pattern(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+$/)
     .trim()
     .required(),
-  color: Joi.string().trim()
+  color: Joi.string().allow("").trim()
 });
 
 module.exports = { categorySchema };
