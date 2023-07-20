@@ -8,7 +8,7 @@ class Server {
   #port;
   constructor() {
     this.#app = new App().getApp();
-    this.#port = process.env.PORT || 3000;
+    this.#port = process.env.PORT;
 
     this.#app.listen(this.#port, () => {
       console.log(`Server is running on port ${this.#port}`);
