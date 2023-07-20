@@ -20,7 +20,9 @@ class NewsController {
   static async findAll(req, res) {
     try {
       const { page = 1 } = req.query;
-      const limit = 6;
+      // const limit = 6;
+      // const offset = (Number(page) - 1) * limit;
+      const limit = 100;
       const offset = (Number(page) - 1) * limit;
 
       const news = await db.News.findAll({

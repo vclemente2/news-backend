@@ -13,13 +13,16 @@ module.exports = (sequelize, DataTypes) => {
     {
       title: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.TEXT
       },
       description: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.TEXT
       },
       author: {
+        type: DataTypes.STRING
+      },
+      image: {
         type: DataTypes.STRING
       }
     },
