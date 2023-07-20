@@ -7,7 +7,9 @@ class App {
   constructor() {
     this.#app = express();
     this.#app.use(
-      cors({ origin: "https://cute-tan-buffalo-cuff.cyclic.app/" })
+      cors({
+        origin: ["http://localhost", "https://news-frontend-khaki.vercel.app"]
+      })
     );
     this.#app.use(express.json());
     this.#app.use(new Routes().getRoute());
