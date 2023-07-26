@@ -1,4 +1,3 @@
-const db = require("../connection/database");
 const { ApiError } = require("../errors/ApiError");
 const { NewsService } = require("../services/NewsService");
 
@@ -11,8 +10,11 @@ class NewsController {
 
   create = async (req, res) => {
     const data = req.body;
+    const image = req.file;
 
-    const createdNews = await this.#service.create(data);
+    const createdNews = image
+      ? await this.#service.create(data, image)
+      : await this.#service.create(data);
 
     if (!createdNews) throw new ApiError(500);
 
@@ -27,11 +29,8 @@ class NewsController {
     return res.json(news);
   };
 
-  findAll = async (req, res) => {
-    const news = await db.News.findAll({
-      order: [["updatedAt", "DESC"]],
-      include: "category"
-    });
+  findAll = async (_, res) => {
+    const news = await this.#service.findAll();
 
     return res.json(news);
   };
