@@ -7,7 +7,7 @@ class BodyValidation {
         req.body = await schema.validateAsync(req.body);
         next();
       } catch (error) {
-        throw new ApiError(error.message, 422);
+        throw new ApiError(422, error.message);
       }
     };
   }

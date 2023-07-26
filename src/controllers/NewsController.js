@@ -7,7 +7,7 @@ class NewsController {
 
     const createdNews = await db.News.create(data);
 
-    if (!createdNews) throw new ApiError("Internal error.", 500);
+    if (!createdNews) throw new ApiError(500);
 
     return res.status(201).json(createdNews);
   }

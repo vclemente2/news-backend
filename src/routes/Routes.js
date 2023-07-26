@@ -1,13 +1,14 @@
 const { Router } = require("express");
-const { CategoryController } = require("../Controllers/CategoryController");
+const { CategoryController } = require("../controllers/CategoryController");
 const { BodyValidation } = require("../middlewares/bodyValidationMiddleware");
-const { NewsController } = require("../Controllers/NewsController");
+const { NewsController } = require("../controllers/NewsController");
 const { categorySchema } = require("../schemas/categorySchema");
 const { newsSchema } = require("../schemas/newsSchema");
 const { upload } = require("../config/multer");
 
 class Routes {
   #route;
+  #categoryController = new CategoryController();
 
   constructor() {
     this.#route = Router();
@@ -19,11 +20,11 @@ class Routes {
           author: "Vinicius Bastos Clemente"
         })
       )
-      .get("/category", CategoryController.findAll)
+      .get("/category", this.#categoryController.findAll)
       .post(
         "/category",
         BodyValidation.validate(categorySchema),
-        CategoryController.create
+        this.#categoryController.create
       )
       .get("/news/all", NewsController.findAll)
       .get("/news", NewsController.paginate)
