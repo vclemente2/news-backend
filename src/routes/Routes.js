@@ -9,6 +9,7 @@ const { upload } = require("../config/multer");
 class Routes {
   #route;
   #categoryController = new CategoryController();
+  #newsController = new NewsController();
 
   constructor() {
     this.#route = Router();
@@ -26,13 +27,13 @@ class Routes {
         BodyValidation.validate(categorySchema),
         this.#categoryController.create
       )
-      .get("/news/all", NewsController.findAll)
-      .get("/news", NewsController.paginate)
+      .get("/news/all", this.#newsController.findAll)
+      .get("/news", this.#newsController.paginate)
       .post(
         "/news",
         upload.single("image"),
         BodyValidation.validate(newsSchema),
-        NewsController.create
+        this.#newsController.create
       );
   }
 
