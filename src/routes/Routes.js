@@ -4,6 +4,7 @@ const { BodyValidation } = require("../middlewares/bodyValidationMiddleware");
 const { NewsController } = require("../Controllers/NewsController");
 const { categorySchema } = require("../schemas/categorySchema");
 const { newsSchema } = require("../schemas/newsSchema");
+const { upload } = require("../config/multer");
 
 class Routes {
   #route;
@@ -28,6 +29,7 @@ class Routes {
       .get("/news", NewsController.paginate)
       .post(
         "/news",
+        upload.single("image"),
         BodyValidation.validate(newsSchema),
         NewsController.create
       );
