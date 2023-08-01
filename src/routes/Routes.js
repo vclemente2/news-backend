@@ -13,20 +13,27 @@ class Routes {
 
   constructor() {
     this.#route = Router();
+  }
+
+  getRoute() {
+    this.#createRoutes();
+    return this.#route;
+  }
+
+  #createRoutes() {
+    this.#route.get("/", (_, res) =>
+      res.json({
+        version: "1.0.0",
+        description: "News API",
+        author: "Vinicius Bastos Clemente"
+      })
+    );
+    this.#newsRoutes();
+    this.#categoryRoutes();
+  }
+
+  #newsRoutes() {
     this.#route
-      .get("/", (_, res) =>
-        res.json({
-          version: "1.0.0",
-          description: "News API",
-          author: "Vinicius Bastos Clemente"
-        })
-      )
-      .get("/category", this.#categoryController.findAll)
-      .post(
-        "/category",
-        BodyValidation.validate(categorySchema),
-        this.#categoryController.create
-      )
       .get("/news/all", this.#newsController.findAll)
       .get("/news", this.#newsController.paginate)
       .post(
@@ -37,8 +44,14 @@ class Routes {
       );
   }
 
-  getRoute() {
-    return this.#route;
+  #categoryRoutes() {
+    this.#route
+      .get("/category", this.#categoryController.findAll)
+      .post(
+        "/category",
+        BodyValidation.validate(categorySchema),
+        this.#categoryController.create
+      );
   }
 }
 
