@@ -11,11 +11,20 @@ class Server {
     this.#port = process.env.PORT;
   }
 
-  init = () => {
-    this.#app.listen(this.#port, () => {
-      console.log(`Server is running on port ${this.#port}`);
+  static init = () => {
+    const server = new Server();
+    server.app.listen(server.port, () => {
+      console.log(`Server is running on port ${server.port}`);
     });
   };
+
+  get app() {
+    return this.#app;
+  }
+
+  get port() {
+    return this.#port;
+  }
 }
 
-new Server().init();
+Server.init();
