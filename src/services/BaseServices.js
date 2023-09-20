@@ -45,6 +45,15 @@ class BaseServices {
 
     return updatedData;
   }
+
+  async destroy(id, transaction = null) {
+    const [count] = await this.db[this.model].destroy({
+      where: { id },
+      transaction: transaction
+    });
+
+    if (!count) throw new ApiError(404, "Register not found.");
+  }
 }
 
 module.exports = { BaseServices };

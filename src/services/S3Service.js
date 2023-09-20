@@ -18,6 +18,13 @@ class S3Service {
       url: image.Location
     };
   };
+
+  static destroy = (path) => {
+    s3.deleteObject({
+      Bucket: process.env.S3_BUCKET,
+      Key: path
+    });
+  };
 }
 
 module.exports = { S3Service };

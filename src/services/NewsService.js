@@ -62,6 +62,10 @@ class NewsService extends BaseServices {
       lastPage
     };
   };
+
+  destroy = async (id) => {
+    super.destroy(id);
+  };
 }
 
 module.exports = { NewsService };
