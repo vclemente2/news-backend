@@ -55,7 +55,7 @@ class BaseServices {
   }
 
   async destroy(id, transaction = null) {
-    const [count] = await this.db[this.model].destroy({
+    const count = await this.db[this.model].destroy({
       where: { id },
       transaction: transaction
     });

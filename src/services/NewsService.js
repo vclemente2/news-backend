@@ -13,7 +13,7 @@ class NewsService extends BaseServices {
 
       if (file) {
         const { url, path } = await S3Service.create(file, createdNews.id);
-        console.log(path);
+
         const createdNewsWithImage = await super.update(
           { image: url, image_key: path },
           { where: { id: createdNews.id } },
@@ -64,10 +64,12 @@ class NewsService extends BaseServices {
   };
 
   destroy = async (id) => {
-    const news = this.findOne(id);
+    const news = await this.findOne(id);
 
-    return news;
-    super.destroy(id);
+    await this.db.sequelize.transaction(async (t) => {
+      if (news.image_key) await S3Service.destroy(news.image_key);
+      await super.destroy(id, t);
+    });
   };
 }
 

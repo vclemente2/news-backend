@@ -20,11 +20,13 @@ class S3Service {
     };
   };
 
-  static destroy = (path) => {
-    s3.deleteObject({
-      Bucket: process.env.S3_BUCKET,
-      Key: path
-    });
+  static destroy = async (path) => {
+    await s3
+      .deleteObject({
+        Bucket: process.env.S3_BUCKET,
+        Key: path
+      })
+      .promise();
   };
 }
 

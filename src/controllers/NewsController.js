@@ -37,9 +37,9 @@ class NewsController {
 
   destroy = async (req, res) => {
     const { id } = req.params;
-    const news = await this.#service.destroy(id);
+    await this.#service.destroy(id);
 
-    return res.json(news);
+    return res.sendStatus(204);
   };
 }
 
