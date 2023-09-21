@@ -12,10 +12,10 @@ class NewsService extends BaseServices {
       const createdNews = await super.create(data, t);
 
       if (file) {
-        const { url } = await S3Service.create(file, createdNews.id);
-
+        const { url, path } = await S3Service.create(file, createdNews.id);
+        console.log(path);
         const createdNewsWithImage = await super.update(
-          { image: url },
+          { image: url, image_key: path },
           { where: { id: createdNews.id } },
           t
         );
