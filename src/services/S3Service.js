@@ -15,7 +15,8 @@ class S3Service {
     if (!image.Location) throw new ApiError(500);
 
     return {
-      url: image.Location
+      url: image.Location,
+      path: image.Key
     };
   };
 

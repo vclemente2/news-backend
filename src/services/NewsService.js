@@ -64,6 +64,9 @@ class NewsService extends BaseServices {
   };
 
   destroy = async (id) => {
+    const news = this.findOne(id);
+
+    return news;
     super.destroy(id);
   };
 }

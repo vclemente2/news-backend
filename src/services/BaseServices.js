@@ -25,6 +25,14 @@ class BaseServices {
     return createdData;
   }
 
+  async findOne(id) {
+    const data = await this.db[this.model].findByPk(id);
+
+    if (!data) throw new ApiError(404, "Register not found.");
+
+    return data;
+  }
+
   async findAll() {
     const data = await this.db[this.model].findAll();
 

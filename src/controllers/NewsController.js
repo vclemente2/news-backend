@@ -34,6 +34,13 @@ class NewsController {
 
     return res.json(news);
   };
+
+  destroy = async (req, res) => {
+    const { id } = req.params;
+    const news = await this.#service.destroy(id);
+
+    return res.json(news);
+  };
 }
 
 module.exports = { NewsController };

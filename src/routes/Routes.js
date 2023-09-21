@@ -41,7 +41,8 @@ class Routes {
         upload.single("image"),
         BodyValidation.validate(newsSchema),
         this.#newsController.create
-      );
+      )
+      .delete("/news/:id", this.#newsController.destroy);
   }
 
   #categoryRoutes() {
