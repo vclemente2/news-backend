@@ -17,8 +17,10 @@ A API backend oferece os seguintes recursos:
 
   - Endpoint: `GET /news`
   - Descrição: Recupera uma página de notícias, com suporte a paginação.
+    - Aceita query params (`page`) para acessar uma página específica na consulta.
 
 - Criar nova notícia:
+
   - Endpoint: `POST /news`
   - Descrição: Cria uma nova notícia no sistema.
   - Parâmetros:
@@ -27,6 +29,10 @@ A API backend oferece os seguintes recursos:
     - `description`: (string) Conteúdo da notícia.
     - `author`: (string) Autor da notícia.
     - `category_id`: (string) Categoria da notícia.
+
+- Excluir uma notícia:
+  - Endpoint: `DELETE /news/:id`
+  - Descrição: Exclui uma das notícias cadastradas no sistema.
 
 ### Gerenciamento de Categorias
 
