@@ -49,7 +49,7 @@ module.exports = {
           category_id: getRandomCategoryId(),
           image:
             "https://news-page-production.s3.us-east-005.backblazeb2.com/4/stock-photo-tranquil-sunset-seascape-cloudy-sky.jpeg",
-          image: "4/stock-photo-tranquil-sunset-seascape-cloudy-sky.jpeg",
+          image_key: "4/stock-photo-tranquil-sunset-seascape-cloudy-sky.jpeg",
           createdAt: new Date(),
           updatedAt: new Date()
         },
